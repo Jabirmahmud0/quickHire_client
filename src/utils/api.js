@@ -7,6 +7,15 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  // Fix CORS trailing slash issue
+  withCredentials: false,
+});
+
+// Add interceptor to handle trailing slashes
+api.interceptors.request.use(config => {
+  // Ensure URL doesn't have double slashes
+  config.url = config.url?.replace(/\/+/g, '/');
+  return config;
 });
 
 export default api;

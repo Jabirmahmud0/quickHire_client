@@ -38,7 +38,7 @@ const JobListingsPage = () => {
       if (location) params.append('location', location);
       if (category) params.append('category', category);
 
-      const res = await api.get(`?${params.toString()}`);
+      const res = await api.get(`/jobs${params.toString() ? '?' + params.toString() : ''}`);
       setJobs(res.data);
     } catch (err) {
       console.error('Error fetching jobs:', err);
