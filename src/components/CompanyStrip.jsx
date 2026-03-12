@@ -8,11 +8,11 @@ const CompanyStrip = () => {
       <div className="max-w-7xl mx-auto space-y-12">
         <p className="text-[#202430] text-lg font-medium opacity-50 text-center md:text-left">Companies we helped grow</p>
         <div className="flex flex-wrap justify-between items-center gap-10 grayscale opacity-40">
-          <span className="text-4xl font-black tracking-tighter">vodafone</span>
-          <span className="text-4xl font-black tracking-tighter">intel.</span>
-          <span className="text-4xl font-black tracking-tighter">TESLA</span>
-          <span className="text-4xl font-black tracking-tighter">AMDA</span>
-          <span className="text-4xl font-black tracking-tighter">Talkit</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike" className="h-8 md:h-12 object-contain" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-8 md:h-10 object-contain" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Y_Combinator_logo.svg" alt="Y Combinator" className="h-8 md:h-12 object-contain" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Slack_Technologies_Logo.svg/1024px-Slack_Technologies_Logo.svg.png" alt="Slack" className="h-8 md:h-10 object-contain" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Dropbox_Logo.png" alt="Dropbox" className="h-8 md:h-10 object-contain" />
         </div>
       </div>
     </section>

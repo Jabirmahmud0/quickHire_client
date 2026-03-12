@@ -3,7 +3,7 @@ import React from 'react';
 const CTABanner = () => {
   return (
     <section className="bg-white py-20 px-4 md:px-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto rounded-none bg-[#4540DB] p-12 md:p-24 relative flex flex-col md:flex-row items-center justify-between gap-12 text-white">
+        <div className="max-w-7xl mx-auto rounded-3xl bg-[#4540DB] p-12 md:p-24 relative flex flex-col md:flex-row items-center justify-between gap-12 text-white">
             <div className="space-y-8 max-w-lg z-10 text-center md:text-left">
                 <h2 className="text-4xl md:text-6xl font-black leading-tight">
                     Start posting <br /> jobs today
@@ -11,13 +11,13 @@ const CTABanner = () => {
                 <p className="text-white/80 text-xl font-medium">
                     Start posting jobs for only $10.
                 </p>
-                <button className="bg-white text-[#4540DB] px-10 py-5 font-black text-lg hover:bg-gray-100 transition-all rounded-none shadow-xl">
+                <button className="bg-white text-[#4540DB] px-10 py-5 font-black text-lg hover:bg-gray-100 transition-all rounded-xl shadow-xl">
                     Sign Up For Free
                 </button>
             </div>
             
-            <div className="flex-1 w-full max-w-2xl relative block md:translate-x-12 translate-y-12 shadow-2xl skew-y-3">
-                 <div className="bg-white rounded-none p-8 md:p-12 w-full h-[300px] md:h-[450px]">
+            <div className="flex-1 w-full max-w-2xl relative block md:translate-x-12 translate-y-12 shadow-2xl skew-y-3 rounded-2xl overflow-hidden">
+                 <div className="bg-white p-8 md:p-12 w-full h-[300px] md:h-[450px]">
                      <div className="flex justify-between items-center mb-10 pb-6 border-b border-gray-100">
                          <div className="flex items-center gap-4">
                              <div className="w-10 h-10 bg-[#4540DB] rounded-full"></div>

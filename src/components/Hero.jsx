@@ -19,7 +19,7 @@ const Hero = () => {
             Great platform for the job seeker that searching for new career heights and passionate about startups.
           </p>
           
-          <div className="bg-white p-4 shadow-xl flex flex-col md:flex-row gap-4 max-w-2xl border border-gray-100">
+          <div className="bg-white p-4 shadow-xl flex flex-col md:flex-row gap-4 max-w-2xl border border-gray-100 rounded-xl md:rounded-full">
             <div className="flex items-center flex-1 gap-3 px-2 border-b md:border-b-0 md:border-r border-gray-100 pb-3 md:pb-0">
               <Search className="text-gray-400" size={20} />
               <input 
@@ -36,7 +36,7 @@ const Hero = () => {
                 <option>London, UK</option>
               </select>
             </div>
-            <button className="bg-[#4540DB] text-white font-bold py-4 px-10 hover:bg-opacity-90 transition-all">
+            <button className="bg-[#4540DB] text-white font-bold py-4 px-10 hover:bg-opacity-90 transition-all rounded-lg md:rounded-full whitespace-nowrap">
               Search my job
             </button>
           </div>
@@ -52,13 +52,12 @@ const Hero = () => {
         
         <div className="flex-1 w-full flex justify-center h-full">
            <div className="relative">
-              <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] relative">
-                {/* Simplified hero design with a frame and placeholder for now */}
-                <div className="absolute top-0 right-0 w-full h-full border-2 border-gray-200 bg-white shadow-lg overflow-hidden flex items-center justify-center">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600&h=800" alt="Job Seeker" className="object-cover w-full h-full grayscale" />
+              <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] relative mt-10 md:mt-0">
+                <div className="absolute top-0 right-0 w-full h-full bg-white overflow-hidden flex items-center justify-center rounded-tl-[100px] rounded-br-[100px] rounded-tr-xl rounded-bl-xl shadow-2xl z-10 border-8 border-white">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600&h=800" alt="Job Seeker" className="object-cover w-full h-full" />
                 </div>
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#4540DB] rounded-full z-[-1] opacity-10"></div>
-                <div className="absolute -top-6 -right-6 w-48 h-48 bg-gray-200 rounded-full z-[-1] opacity-50"></div>
+                <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-[#4540DB] to-indigo-400 rounded-full z-0 opacity-10"></div>
+                <div className="absolute -top-8 -right-8 w-64 h-64 bg-gray-100 rounded-full z-0 opacity-80"></div>
               </div>
            </div>
         </div>

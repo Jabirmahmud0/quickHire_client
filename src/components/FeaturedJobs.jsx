@@ -2,12 +2,12 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const JobCard = ({ logo, title, type, company, location, description, tags }) => (
-  <div className="p-8 border border-gray-100 bg-white hover:shadow-2xl transition-all group flex flex-col h-full rounded-none">
+  <div className="p-8 border border-gray-100 bg-white hover:shadow-2xl transition-all group flex flex-col h-full rounded-2xl">
     <div className="flex justify-between items-start mb-8 w-full">
-      <div className="w-16 h-16 flex items-center justify-center p-3 border border-gray-50 shadow-sm bg-white overflow-hidden rounded-none">
+      <div className="w-16 h-16 flex items-center justify-center p-3 border border-gray-50 shadow-sm bg-white overflow-hidden rounded-xl">
         <img src={logo} alt={company} className="w-full h-full object-contain" />
       </div>
-      <span className="text-[#4540DB] border border-[#4540DB] px-5 py-2 text-sm font-bold rounded-none bg-[#4540DB]/5">{type}</span>
+      <span className="text-[#4540DB] border border-[#4540DB] px-5 py-2 text-sm font-bold rounded-xl bg-[#4540DB]/5">{type}</span>
     </div>
     
     <div className="space-y-4 flex-grow">

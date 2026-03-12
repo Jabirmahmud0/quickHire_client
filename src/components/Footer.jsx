@@ -40,13 +40,13 @@ const Footer = () => {
           <div className="space-y-8">
             <h4 className="text-xl font-bold">Get job notifications</h4>
             <p className="text-gray-400 text-lg">The latest job news, articles, sent to your inbox weekly.</p>
-            <div className="flex gap-4">
+            <div className="flex">
               <input 
                 type="email" 
                 placeholder="Email Address" 
-                className="flex-1 bg-white p-4 text-[#202430] outline-none rounded-none"
+                className="flex-1 bg-white p-4 text-[#202430] outline-none rounded-l-xl"
               />
-              <button className="bg-[#4540DB] text-white px-8 py-4 font-bold hover:bg-opacity-90 transition-all rounded-none">
+              <button className="bg-[#4540DB] text-white px-8 py-4 font-bold hover:bg-opacity-90 transition-all rounded-r-xl">
                 Subscribe
               </button>
             </div>

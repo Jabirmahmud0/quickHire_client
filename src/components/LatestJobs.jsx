@@ -2,9 +2,9 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const LatestJobItem = ({ logo, title, company, location, tags }) => (
-  <div className="p-8 border border-gray-100 bg-white flex flex-col md:flex-row items-center justify-between gap-8 group hover:shadow-lg transition-all rounded-none">
+  <div className="p-8 border border-gray-100 bg-white flex flex-col md:flex-row items-center justify-between gap-8 group hover:shadow-xl transition-all rounded-2xl">
     <div className="flex items-center gap-8 flex-1 w-full">
-      <div className="w-16 h-16 flex items-center justify-center p-3 bg-white border border-gray-50 flex-shrink-0">
+      <div className="w-16 h-16 flex items-center justify-center p-3 bg-white border border-gray-50 flex-shrink-0 rounded-xl overflow-hidden shadow-sm">
         <img src={logo} alt={company} className="w-full h-full object-contain" />
       </div>
       <div className="space-y-2">
@@ -23,10 +23,10 @@ const LatestJobItem = ({ logo, title, company, location, tags }) => (
       </div>
     </div>
     <div className="flex flex-col items-center md:items-end gap-3 w-full md:w-auto">
-        <button className="bg-[#4540DB] text-white px-10 py-4 font-black w-full md:w-auto hover:bg-opacity-90 transition-all rounded-none">
+        <button className="bg-[#4540DB] text-white px-10 py-4 font-black w-full md:w-auto hover:bg-opacity-90 transition-all rounded-xl">
             Apply
         </button>
-        <div className="w-full h-2 bg-gray-100 rounded-none overflow-hidden hidden md:block">
+        <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden hidden md:block">
             <div className="w-2/3 h-full bg-[#56CDAD]"></div>
         </div>
         <p className="text-sm text-[#515B6F] font-medium hidden md:block">5 applied of 10 capacity</p>

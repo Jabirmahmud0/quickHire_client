@@ -2,8 +2,8 @@ import React from 'react';
 import { Palette, BarChart3, Megaphone, DollarSign, Monitor, UserCheck, Briefcase, Users2, ArrowRight } from 'lucide-react';
 
 const CategoryCard = ({ icon: Icon, title, count, isActive }) => (
-  <div className={`p-8 border border-gray-100 hover:shadow-xl transition-all cursor-pointer group ${isActive ? 'bg-[#4540DB] text-white border-[#4540DB]' : 'bg-white text-[#202430]'}`}>
-    <div className={`w-12 h-12 mb-6 flex items-center justify-center rounded-none ${isActive ? 'bg-white/10' : 'bg-[#F8F8FD]'}`}>
+  <div className={`p-8 border border-gray-100 hover:shadow-2xl transition-all cursor-pointer group rounded-2xl ${isActive ? 'bg-[#4540DB] text-white border-[#4540DB]' : 'bg-white text-[#202430]'}`}>
+    <div className={`w-12 h-12 mb-6 flex items-center justify-center rounded-xl ${isActive ? 'bg-white/10' : 'bg-[#F8F8FD]'}`}>
       <Icon className={isActive ? 'text-white' : 'text-[#4540DB]'} size={24} />
     </div>
     <div className="space-y-3">

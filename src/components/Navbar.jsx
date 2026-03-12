@@ -15,8 +15,8 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Link to="/login" className="text-[#4540DB] font-bold px-6 py-3 hidden md:block">Login</Link>
-        <Link to="/signup" className="bg-[#4540DB] text-white font-bold px-6 py-3 rounded-none hover:bg-opacity-90 transition-all">Sign Up</Link>
+        <Link to="/login" className="text-[#4540DB] font-bold px-6 py-3 hidden md:block hover:bg-gray-50 rounded-xl transition-all">Login</Link>
+        <Link to="/signup" className="bg-[#4540DB] text-white font-bold px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all shadow-md">Sign Up</Link>
         <button className="md:hidden">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
         </button>
