@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Clash Display", "Playfair Display", ui-serif, serif;
+  
+  --color-primary: #4540DB;
+  --color-dark: #202430;
+  --color-body: #515B6F;
+  --color-accent: #56CDAD;
+  --color-highlight: #FFB836;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-white text-dark subpixel-antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 hover:bg-gray-300 transition-colors;
+}
+
+/* Custom animations for smooth appearance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
