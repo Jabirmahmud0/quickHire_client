@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -37,7 +37,7 @@ const AdminPage = () => {
 
     const fetchJobs = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/jobs');
+            const res = await api.get('/jobs');
             setJobs(res.data);
         } catch (err) {
             console.error(err);
@@ -49,7 +49,7 @@ const AdminPage = () => {
     const fetchApplications = async () => {
         setAppsLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/applications');
+            const res = await api.get('/applications');
             setApplications(res.data);
         } catch (err) {
             console.error(err);
@@ -61,7 +61,7 @@ const AdminPage = () => {
     const handleDeleteApplication = async (id) => {
         if (!window.confirm('Are you sure you want to delete this application?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/applications/${id}`);
+            await api.delete(`/applications/${id}`);
             setApplications(applications.filter(app => app._id !== id));
         } catch (err) {
             console.error(err);
@@ -71,7 +71,7 @@ const AdminPage = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this job listing?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/jobs/${id}`);
+            await api.delete(`/jobs/${id}`);
             setJobs(jobs.filter(job => job._id !== id));
         } catch (err) {
             console.error(err);
@@ -100,9 +100,9 @@ const AdminPage = () => {
             const jobData = { ...newJob, tags: newJob.tags.split(',').map(t => t.trim()) };
             
             if (editingJobId) {
-                await axios.put(`http://localhost:5000/api/jobs/${editingJobId}`, jobData);
+                await api.put(`/jobs/${editingJobId}`, jobData);
             } else {
-                await axios.post('http://localhost:5000/api/jobs', jobData);
+                await api.post('/jobs', jobData);
             }
             
             setShowAddForm(false);
@@ -151,29 +151,42 @@ const AdminPage = () => {
                 </div>
 
                 {/* Main Content */}
-                <main className="flex-1 p-8 md:p-12 space-y-12">
+                <main className="flex-1 p-4 md:p-12 space-y-8 md:y-12 min-w-0">
+                    {/* Mobile Tab Switcher */}
+                    <div className="flex lg:hidden bg-white border-b border-gray-100 -mx-4 -mt-4 mb-8 overflow-x-auto no-scrollbar">
+                        {['Dashboard', 'Job Listings', 'Applicants'].map(tab => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`px-6 py-4 whitespace-nowrap font-bold text-sm transition-all border-b-2 ${activeTab === tab ? 'text-[#4540DB] border-[#4540DB]' : 'text-[#515B6F] border-transparent'}`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
+                    </div>
+
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
-                             <h1 className="text-4xl font-black text-[#202430]">Job Postings</h1>
+                             <h1 className="text-3xl md:text-4xl font-black text-[#202430]">{activeTab}</h1>
                              <p className="text-[#515B6F] font-medium opacity-70">Manage your company's active job opportunities</p>
                         </div>
                         <button 
                             onClick={() => setShowAddForm(true)}
-                            className="bg-[#4540DB] text-white px-8 py-4 font-black flex items-center gap-3 hover:bg-opacity-90 shadow-lg shadow-[#4540DB]/20"
+                            className="w-full md:w-auto bg-[#4540DB] text-white px-8 py-4 font-black flex items-center justify-center gap-3 hover:bg-opacity-90 shadow-lg shadow-[#4540DB]/20"
                         >
                             <Plus size={20} /> Post complex job
                         </button>
                     </div>
 
                     {activeTab === 'Job Listings' ? (
-                        <div className="bg-white border border-gray-100 shadow-sm overflow-hidden">
-                            <table className="w-full text-left">
+                        <div className="bg-white border border-gray-100 shadow-sm overflow-x-auto rounded-xl md:rounded-none">
+                            <table className="w-full text-left min-w-[600px]">
                                 <thead className="bg-gray-50 border-b border-gray-100">
                                     <tr>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Job Title</th>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Date Posted</th>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Category</th>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider text-right">Actions</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Job Title</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Date Posted</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Category</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
@@ -226,14 +239,14 @@ const AdminPage = () => {
                             </table>
                         </div>
                     ) : activeTab === 'Applicants' ? (
-                        <div className="bg-white border border-gray-100 shadow-sm overflow-hidden">
-                            <table className="w-full text-left">
+                        <div className="bg-white border border-gray-100 shadow-sm overflow-x-auto rounded-xl md:rounded-none">
+                            <table className="w-full text-left min-w-[700px]">
                                 <thead className="bg-gray-50 border-b border-gray-100">
                                     <tr>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Applicant Name</th>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Applied Job</th>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Date Applied</th>
-                                        <th className="p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider text-right">Actions</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Applicant Name</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Applied Job</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider">Date Applied</th>
+                                        <th className="p-4 md:p-6 text-sm font-black text-[#515B6F] uppercase tracking-wider text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">

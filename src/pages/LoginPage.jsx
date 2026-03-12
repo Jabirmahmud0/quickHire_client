@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -11,9 +13,8 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Implement actual authentication
-    console.log('Login:', formData);
-    navigate('/admin');
+    login(formData.email);
+    navigate(-1);
   };
 
   return (
@@ -74,6 +75,15 @@ const LoginPage = () => {
               Sign In
             </button>
           </form>
+
+          <div className="pt-4 border-t border-gray-100">
+             <Link 
+                to="/admin/login" 
+                className="w-full flex items-center justify-center gap-2 p-4 bg-gray-50 text-[#515B6F] font-bold rounded-xl hover:bg-gray-100 transition-all"
+             >
+                Login as Admin
+             </Link>
+          </div>
 
           <p className="text-center text-[#515B6F] font-medium">
             Don't have an account?{' '}

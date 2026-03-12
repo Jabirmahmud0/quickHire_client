@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Search, MapPin, Grid, List as ListIcon, ArrowRight } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import JobCard from '../components/JobCard';
 
 const JobListingsPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState('grid');
+  
   const [filters, setFilters] = useState({
-    search: '',
-    location: '',
-    category: ''
+    search: searchParams.get('search') || '',
+    location: searchParams.get('location') || '',
+    category: searchParams.get('category') || ''
   });
 
   useEffect(() => {
+    // Update URL when filters change
+    const newParams = {};
+    if (filters.search) newParams.search = filters.search;
+    if (filters.location) newParams.location = filters.location;
+    if (filters.category) newParams.category = filters.category;
+    setSearchParams(newParams);
+    
     fetchJobs();
   }, [filters]);
 
@@ -28,7 +38,7 @@ const JobListingsPage = () => {
       if (location) params.append('location', location);
       if (category) params.append('category', category);
 
-      const res = await axios.get(`http://localhost:5000/api/jobs?${params.toString()}`);
+      const res = await api.get(`?${params.toString()}`);
       setJobs(res.data);
     } catch (err) {
       console.error('Error fetching jobs:', err);
@@ -51,6 +61,7 @@ const JobListingsPage = () => {
                         type="text"
                         placeholder="Job title or keyword"
                         className="w-full outline-none text-[#202430] placeholder-gray-400"
+                        value={filters.search}
                         onChange={(e) => setFilters({...filters, search: e.target.value})}
                     />
                 </div>
@@ -60,6 +71,7 @@ const JobListingsPage = () => {
                         type="text"
                         placeholder="Location"
                         className="w-full outline-none text-[#202430] placeholder-gray-400"
+                        value={filters.location}
                         onChange={(e) => setFilters({...filters, location: e.target.value})}
                     />
                 </div>
@@ -95,12 +107,17 @@ const JobListingsPage = () => {
                  </div>
                  <select
                     className="p-3 bg-white border border-gray-100 text-[#202430] font-bold outline-none rounded-xl"
+                    value={filters.category}
                     onChange={(e) => setFilters({...filters, category: e.target.value})}
                  >
                     <option value="">All Categories</option>
                     <option value="Design">Design</option>
+                    <option value="Sales">Sales</option>
                     <option value="Marketing">Marketing</option>
+                    <option value="Finance">Finance</option>
                     <option value="Technology">Technology</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Business">Business</option>
                     <option value="Human Resource">Human Resource</option>
                  </select>
             </div>

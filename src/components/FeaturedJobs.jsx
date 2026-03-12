@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import axios from 'axios';
+import api from '../utils/api';
 import JobCard from './JobCard';
 
 const FeaturedJobs = () => {
@@ -10,7 +10,7 @@ const FeaturedJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/jobs');
+        const res = await api.get('/jobs');
         setJobs(res.data.slice(0, 8));
       } catch (err) {
         console.error('Error fetching jobs:', err);

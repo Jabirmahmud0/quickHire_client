@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { SiNetlify, SiDropbox, SiTerraform, SiPacker, SiWebflow, SiUdacity } from 'react-icons/si';
 
 // Map company names to their react-icon component with brand colors
@@ -61,7 +61,7 @@ const LatestJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/jobs');
+        const res = await api.get('/jobs');
         // Get jobs 8 through 16 for variety from Featured Jobs
         setJobs(res.data.slice(8, 16));
       } catch (err) {

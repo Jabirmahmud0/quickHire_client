@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { MapPin, Building, Calendar, ArrowLeft, CheckCircle } from 'lucide-react';
@@ -26,7 +26,7 @@ const JobDetailPage = () => {
 
   const fetchJob = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/jobs/${id}`);
+      const res = await api.get(`/jobs/${id}`);
       setJob(res.data);
     } catch (err) {
       console.error('Error fetching job details:', err);
@@ -38,7 +38,7 @@ const JobDetailPage = () => {
   const handleApply = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/applications', {
+      await api.post('/applications', {
         job_id: id,
         ...formData
       });

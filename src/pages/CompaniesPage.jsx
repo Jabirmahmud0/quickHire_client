@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Search, MapPin, Briefcase } from 'lucide-react';
@@ -15,7 +15,7 @@ const CompaniesPage = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/jobs');
+      const res = await api.get('/jobs');
       setJobs(res.data);
     } catch (err) {
       console.error('Error fetching jobs:', err);

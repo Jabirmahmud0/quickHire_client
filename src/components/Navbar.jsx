@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LogOut, User, LayoutDashboard } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+
   return (
     <nav className="flex justify-between items-center py-6 px-4 md:px-20 bg-white sticky top-0 z-50">
       <div className="flex items-center gap-12">
@@ -15,8 +19,31 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Link to="/login" className="text-[#4540DB] font-bold px-6 py-3 hidden md:block hover:bg-gray-50 rounded-xl transition-all">Login</Link>
-        <Link to="/signup" className="bg-[#4540DB] text-white font-bold px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all shadow-md">Sign Up</Link>
+        {user ? (
+          <>
+            {user.email === 'admin@quickhire.com' && (
+              <Link to="/admin" className="text-[#515B6F] font-bold p-3 hover:text-[#4540DB] transition-all flex items-center gap-2" title="Admin Dashboard">
+                <LayoutDashboard size={20} />
+                <span className="hidden md:inline">Dashboard</span>
+              </Link>
+            )}
+            <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center text-[#4540DB]">
+                <User size={20} />
+            </div>
+            <button 
+                onClick={logout}
+                className="text-gray-400 hover:text-red-500 transition-colors p-3"
+                title="Sign Out"
+            >
+                <LogOut size={20} />
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="text-[#4540DB] font-bold px-6 py-3 hidden md:block hover:bg-gray-50 rounded-xl transition-all">Login</Link>
+            <Link to="/signup" className="bg-[#4540DB] text-white font-bold px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all shadow-md">Sign Up</Link>
+          </>
+        )}
         <button className="md:hidden">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
         </button>
