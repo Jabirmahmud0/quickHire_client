@@ -5,9 +5,17 @@ const JobCard = ({ logo, title, type, company, location, description, tags }) =>
   <div className="p-8 border border-gray-100 bg-white hover:shadow-2xl transition-all group flex flex-col h-full rounded-2xl">
     <div className="flex justify-between items-start mb-8 w-full">
       <div className="w-16 h-16 flex items-center justify-center p-3 border border-gray-50 shadow-sm bg-white overflow-hidden rounded-xl">
-        <img src={logo} alt={company} className="w-full h-full object-contain" />
+        <img 
+          src={logo} 
+          alt={company} 
+          className="w-full h-full object-contain" 
+          onError={(e) => { 
+            e.target.onerror = null; 
+            e.target.src = `https://ui-avatars.com/api/?name=${company}&background=E5E7EB&color=4540DB&rounded=true&bold=true`; 
+          }} 
+        />
       </div>
-      <span className="text-[#4540DB] border border-[#4540DB] px-5 py-2 text-sm font-bold rounded-xl bg-[#4540DB]/5">{type}</span>
+      <span className="text-[#56CDAD] border border-[#56CDAD]/20 px-5 py-2 text-sm font-bold rounded-full bg-[#56CDAD]/10">{type}</span>
     </div>
     
     <div className="space-y-4 flex-grow">
@@ -22,14 +30,13 @@ const JobCard = ({ logo, title, type, company, location, description, tags }) =>
     
     <div className="mt-8 flex flex-wrap gap-3">
       {tags.map((tag, idx) => {
-        const colors = [
-          'bg-[#FFB836]/10 text-[#FFB836] border-[#FFB836]',
-          'bg-[#56CDAD]/10 text-[#56CDAD] border-[#56CDAD]',
-          'bg-[#4540DB]/10 text-[#4540DB] border-[#4540DB]'
-        ];
-        const color = colors[idx % 3];
+        let colorClass = 'bg-[#4540DB]/10 text-[#4540DB] border-[#4540DB]/20';
+        if (tag === 'Marketing') colorClass = 'bg-[#FFB836]/10 text-[#FFB836] border-[#FFB836]/20';
+        else if (tag === 'Design') colorClass = 'bg-[#56CDAD]/10 text-[#56CDAD] border-[#56CDAD]/20';
+        else if (tag === 'Business' || tag === 'Technology') colorClass = 'bg-[#4540DB]/10 text-[#4540DB] border-[#4540DB]/20';
+        
         return (
-          <span key={idx} className={`px-5 py-1.5 text-sm font-bold border ${color.split(' ').pop()} rounded-full`}>
+          <span key={idx} className={`px-5 py-1.5 text-sm font-bold border rounded-full ${colorClass}`}>
             {tag}
           </span>
         );
@@ -41,7 +48,7 @@ const JobCard = ({ logo, title, type, company, location, description, tags }) =>
 const FeaturedJobs = () => {
   const jobs = [
     {
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Revolut_logo.svg',
+      logo: 'https://logo.clearbit.com/revolut.com',
       title: 'Email Marketing',
       company: 'Revolut',
       location: 'Madrid, Spain',
@@ -50,7 +57,7 @@ const FeaturedJobs = () => {
       type: 'Full Time'
     },
     {
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Dropbox_Logo.png',
+      logo: 'https://logo.clearbit.com/dropbox.com',
       title: 'Brand Designer',
       company: 'Dropbox',
       location: 'San Fransisco, USA',
@@ -59,7 +66,7 @@ const FeaturedJobs = () => {
       type: 'Full Time'
     },
     {
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Nomad_Logo.svg',
+        logo: 'https://logo.clearbit.com/pitch.com',
         title: 'Email Marketing',
         company: 'Pitch',
         location: 'Berlin, Germany',
@@ -68,7 +75,7 @@ const FeaturedJobs = () => {
         type: 'Full Time'
     },
     {
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Nomad_Logo.svg',
+        logo: 'https://logo.clearbit.com/blinkist.com',
         title: 'Visual Designer',
         company: 'Blinklist',
         location: 'Granada, Spain',
@@ -77,7 +84,7 @@ const FeaturedJobs = () => {
         type: 'Full Time'
     },
     {
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Nomad_Logo.svg',
+        logo: 'https://logo.clearbit.com/classpass.com',
         title: 'Product Designer',
         company: 'ClassPass',
         location: 'Manchester, UK',
@@ -86,7 +93,7 @@ const FeaturedJobs = () => {
         type: 'Full Time'
     },
     {
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Nomad_Logo.svg',
+        logo: 'https://logo.clearbit.com/canva.com',
         title: 'Lead Designer',
         company: 'Canva',
         location: 'Ontario, Canada',
@@ -95,7 +102,7 @@ const FeaturedJobs = () => {
         type: 'Full Time'
     },
     {
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Nomad_Logo.svg',
+        logo: 'https://logo.clearbit.com/godaddy.com',
         title: 'Brand Strategist',
         company: 'GoDaddy',
         location: 'Marseille, France',
@@ -104,7 +111,7 @@ const FeaturedJobs = () => {
         type: 'Full Time'
     },
     {
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Nomad_Logo.svg',
+        logo: 'https://logo.clearbit.com/twitter.com',
         title: 'Data Analyst',
         company: 'Twitter',
         location: 'San Diego, US',
