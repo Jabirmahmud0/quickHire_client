@@ -62,8 +62,13 @@ const LatestJobs = () => {
     const fetchJobs = async () => {
       try {
         const res = await api.get('/jobs');
-        // Get jobs 8 through 16 for variety from Featured Jobs
-        setJobs(res.data.slice(8, 16));
+        // Get latest jobs (last 8 from the list, or all if less than 8)
+        const allJobs = res.data;
+        if (allJobs.length <= 8) {
+          setJobs(allJobs);
+        } else {
+          setJobs(allJobs.slice(-8));
+        }
       } catch (err) {
         console.error('Error fetching jobs:', err);
       } finally {
