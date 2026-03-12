@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { SiNetlify, SiDropbox, SiTerraform, SiPacker, SiWebflow, SiUdacity } from 'react-icons/si';
 
 // Map company names to their react-icon component with brand colors
@@ -14,11 +16,11 @@ const companyIcons = {
   'Webflow': () => <SiWebflow size={32} color="#4353FF" />,
 };
 
-const LatestJobItem = ({ company, title, location, tags }) => {
+const LatestJobItem = ({ id, company, title, location, tags }) => {
   const Icon = companyIcons[company] || (() => <div className="text-2xl font-bold">{company[0]}</div>);
   
   return (
-    <div className="p-8 border border-gray-100/60 bg-white flex items-start gap-6 group hover:shadow-xl transition-all rounded-sm cursor-pointer">
+    <Link to={`/jobs/${id}`} className="p-8 border border-gray-100/60 bg-white flex items-start gap-6 group hover:shadow-xl transition-all rounded-sm cursor-pointer block">
       <div className="w-14 h-14 flex items-center justify-center flex-shrink-0 bg-gray-50 rounded-xl group-hover:bg-white transition-colors border border-gray-100">
         <Icon />
       </div>
@@ -48,61 +50,28 @@ const LatestJobItem = ({ company, title, location, tags }) => {
            })}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 const LatestJobs = () => {
-  const jobs = [
-    {
-      title: 'Social Media Assistant',
-      company: 'Nomad',
-      location: 'Paris, France',
-      tags: ['Marketing', 'Design']
-    },
-    {
-      title: 'Social Media Assistant',
-      company: 'Netlify',
-      location: 'Paris, France',
-      tags: ['Marketing', 'Design']
-    },
-    {
-      title: 'Brand Designer',
-      company: 'Dropbox',
-      location: 'San Fransisco, USA',
-      tags: ['Marketing', 'Design']
-    },
-    {
-        title: 'Brand Designer',
-        company: 'Maze',
-        location: 'San Fransisco, USA',
-        tags: ['Marketing', 'Design']
-    },
-    {
-      title: 'Interactive Developer',
-      company: 'Terraform',
-      location: 'Hamburg, Germany',
-      tags: ['Marketing', 'Design']
-    },
-    {
-        title: 'Interactive Developer',
-        company: 'Udacity',
-        location: 'Hamburg, Germany',
-        tags: ['Marketing', 'Design']
-    },
-    {
-      title: 'HR Manager',
-      company: 'Packer',
-      location: 'Lucern, Switzerland',
-      tags: ['Marketing', 'Design']
-    },
-    {
-      title: 'HR Manager',
-      company: 'Webflow',
-      location: 'Lucern, Switzerland',
-      tags: ['Marketing', 'Design']
-    }
-  ];
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/jobs');
+        // Get jobs 8 through 16 for variety from Featured Jobs
+        setJobs(res.data.slice(8, 16));
+      } catch (err) {
+        console.error('Error fetching jobs:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   return (
     <section className="py-24 px-4 md:px-20 bg-[#F8F8FD]">
@@ -117,9 +86,22 @@ const LatestJobs = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {jobs.map((job, idx) => (
-            <LatestJobItem key={idx} {...job} />
-          ))}
+          {loading ? (
+            Array(8).fill(0).map((_, idx) => (
+              <div key={idx} className="h-40 bg-gray-50 animate-pulse rounded-sm border border-gray-100"></div>
+            ))
+          ) : (
+            jobs.map((job, idx) => (
+              <LatestJobItem 
+                key={job._id || idx} 
+                id={job._id}
+                title={job.title}
+                company={job.company}
+                location={job.location}
+                tags={job.tags}
+              />
+            ))
+          )}
         </div>
       </div>
     </section>

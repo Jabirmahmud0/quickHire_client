@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { SiRevolut, SiDropbox, SiCanva, SiGodaddy } from 'react-icons/si';
 
 // Map company names to their react-icon component with brand colors
@@ -13,11 +14,11 @@ export const companyIcons = {
   'Twitter': () => <div className="text-2xl font-black text-[#1DA1F2]">X</div>,
 };
 
-const JobCard = ({ title, type, company, location, description, tags }) => {
+const JobCard = ({ id, title, type, company, location, description, tags }) => {
   const Icon = companyIcons[company] || (() => <div className="text-2xl font-bold">{company[0]}</div>);
 
   return (
-    <div className="p-8 border border-gray-100 bg-white hover:shadow-2xl transition-all group flex flex-col h-full rounded-2xl cursor-pointer">
+    <Link to={`/jobs/${id}`} className="p-8 border border-gray-100 bg-white hover:shadow-2xl transition-all group flex flex-col h-full rounded-2xl cursor-pointer block">
       <div className="flex justify-between items-start mb-8 w-full">
         <div className="w-16 h-16 flex items-center justify-center p-3 border border-gray-50 shadow-sm bg-gray-50 group-hover:bg-white transition-colors overflow-hidden rounded-xl">
           <Icon />
@@ -49,7 +50,7 @@ const JobCard = ({ title, type, company, location, description, tags }) => {
           );
         })}
       </div>
-    </div>
+    </Link>
   );
 };
 

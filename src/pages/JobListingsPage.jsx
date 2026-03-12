@@ -115,6 +115,7 @@ const JobListingsPage = () => {
                 jobs.map(job => (
                     <JobCard
                       key={job._id}
+                      id={job._id}
                       title={job.title}
                       type={job.type}
                       company={job.company}

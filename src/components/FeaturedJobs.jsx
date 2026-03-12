@@ -42,6 +42,7 @@ const FeaturedJobs = () => {
             jobs.map((job, idx) => (
               <JobCard
                 key={job._id || idx}
+                id={job._id}
                 title={job.title}
                 type={job.type}
                 company={job.company}

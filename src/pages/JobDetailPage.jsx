@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { MapPin, Building, Calendar, ArrowLeft, CheckCircle } from 'lucide-react';
+import { companyIcons } from '../components/JobCard';
 
 const JobDetailPage = () => {
   const { id } = useParams();
@@ -70,9 +71,9 @@ const JobDetailPage = () => {
 
         <div className="flex flex-col lg:flex-row gap-16">
             <div className="flex-1 space-y-12">
-                <div className="bg-[#F8F8FD] p-10 flex flex-col md:flex-row items-center gap-8 border border-gray-100">
-                    <div className="w-24 h-24 bg-white p-4 border border-gray-100 shadow-sm flex items-center justify-center">
-                        <img src={job.companyLogo} alt={job.company} className="w-full h-full object-contain" />
+                <div className="bg-[#F8F8FD] p-10 flex flex-col md:flex-row items-center gap-8 border border-gray-100 rounded-3xl">
+                    <div className="w-24 h-24 bg-white p-4 border border-gray-100 shadow-sm flex items-center justify-center rounded-2xl">
+                        {companyIcons[job.company] ? React.createElement(companyIcons[job.company]) : <div className="text-4xl font-bold">{job.company[0]}</div>}
                     </div>
                     <div className="space-y-4 text-center md:text-left">
                         <h1 className="text-4xl font-black text-[#202430]">{job.title}</h1>
